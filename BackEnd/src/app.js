@@ -1,5 +1,5 @@
 const express = require('express');
-const aiRoutes = require('./services/ai.routes'); // Import AI routes
+const aiRoutes = require('./routes/ai.routes'); // Import AI routes
 const cors = require('cors'); // Import CORS middleware
 
 

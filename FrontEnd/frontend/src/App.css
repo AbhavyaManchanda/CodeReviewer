@@ -1,6 +1,7 @@
+/* RESET & BASE STYLES */
 * {
-  margin: 0%;
-  padding: 0%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -9,56 +10,174 @@ body,
 #root {
   height: 100%;
   width: 100%;
+
+  background-color: #0c0c0c;
+  font-family: 'Fira Code', monospace;
+  color: #ccc;
 }
 
-main {
+/* APP LAYOUT */
+.App {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
-  padding: 1.5rem;
+   
+  
+     
+}
+
+/* HEADER */
+.app-header {
+  background-color: #6c6f7e;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.app-header p {
+  font-size: 1rem;
+  color: #c6c3d1;
+}
+
+/* MAIN LAYOUT */
+.app-main {
+  flex: 1;
   display: flex;
   gap: 1rem;
+  padding: 1rem 1.5rem;
+  overflow: hidden;
+  scrollbar-width: none;
+  width:auto;
+  background-color: rgb(40, 39, 39);
+ }
+
+/* PANEL STYLES */
+.code-input-section,
+.code-review-output-section {
+  flex: 1 1 50%;
+  min-width: 0;
+  width:auto;
+   border-radius: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding:10px;
 }
 
-main .left,
-main .right {
-  height: 100%;
-  flex-basis: 50%;
-  border-radius: 0.7rem;
-}
-
-main .left {
-  background-color: #000000;
+/* LEFT PANEL (CODE EDITOR) */
+.code-input-section {
+  background-color: #090909;
   position: relative;
 }
 
-.left .code,
-.code pre,
-.code pre code {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  border-radius: 0.7rem;
-  background-color: #0c0c0c;
+.code-input-section h2 {
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
 }
 
-main .left .review {
+.react-simple-code-editor {
+  /* flex: 1; */
+  overflow: auto;
+  border-radius: 0.7rem;
+  background-color: #eedada;
+}
+
+/* Review Button in Editor */
+.review-button {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background-color: rgb(219, 219, 255);
+  background-color: rgb(191, 191, 250);
   color: #151414;
   padding: 0.5rem 2rem;
   font-weight: 500;
   cursor: pointer;
-  user-select: none;
+  border: none;
   border-radius: 0.7rem;
+  transition: background 0.2s;
 }
 
+.review-button:hover {
+  background-color: rgb(190, 190, 250);
+}
 
-main .right {
-  background-color: #101222;
+.review-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+/* RIGHT PANEL (REVIEW OUTPUT) */
+.code-review-output-section {
+  background-color: #484952;
   padding: 1rem 2rem;
   font-size: 1rem;
+  color: #aab2ba;
   overflow: auto;
-  color: #b29393;
+  scrollbar-width: none;
+}
+
+.review-content pre {
+  background-color: #1e1e2e;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.no-review-message {
+  color: #bcbcbc;
+  font-style: italic;
+}
+
+/* FOOTER */
+.app-footer {
+  background-color: #6c6f7e;
+  padding: 0.5rem;
+  text-align: center;
+  color: #f4efef;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+
+/* MEDIA QUERIES */
+
+/* Tablet View: Stack panels vertically */
+@media (max-width: 1024px) {
+  .app-main {
+    flex-direction: column;
+    scrollbar-width: none;
+  }
+
+  .code-input-section,
+  .code-review-output-section {
+    flex: none;
+    height: 50%;
+
+    scrollbar-width: none;
+  }
+}
+
+/* Mobile View: Show only one section at a time with scroll snapping */
+@media (max-width: 768px) {
+  .app-main {
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+  }
+
+  .code-input-section,
+  .code-review-output-section {
+    flex: none;
+    min-height: 100%;
+    padding-bottom: 20px;
+    scroll-snap-align: start;
+    border-radius: 0;
+    scrollbar-width: none;
+  }
 }
