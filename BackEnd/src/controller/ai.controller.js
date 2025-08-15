@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
 
     try {
         const response = await aiService.generate(code);
-        const cleanResponse = response.replace(/\n+/g,' ').trim();
-        res.json({ response: cleanResponse });
+        const cleanResponse = response.trim();
+        res.send({ response: cleanResponse });
 
     } catch (error) {
         console.error("Error generating AI response:", error);
