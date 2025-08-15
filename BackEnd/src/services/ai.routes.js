@@ -3,7 +3,7 @@ const aiController = require('../controller/ai.controller'); // Import the AI co
 
 const router = express.Router(); // Create a new router instance
 
-router.get('/getResponse',aiController); // Define a route for getting AI responses
+router.post('/getReview',aiController); // Define a route for getting AI responses
 
 
 

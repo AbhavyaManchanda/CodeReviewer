@@ -5,9 +5,15 @@ const aiRoutes = require('./services/ai.routes'); // Import AI routes
 
 const app = express(); // Create an instance of an Express application
 
+app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
+
+
 app.get('/', (req, res) => {
     res.send('Hello World!'); // Define a simple route
 })
+
+
 
 app.use('/ai', aiRoutes); // Use AI routes under the '/ai' path
 
